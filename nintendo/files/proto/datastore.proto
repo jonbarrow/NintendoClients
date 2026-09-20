@@ -310,7 +310,7 @@ struct DataStoreSearchParam {
 	uint8 search_target = 1;
 	list<pid> owner_ids = [];
 	uint8 owner_type = 0;
-	list<uint64> destination_ids = [];
+	list<pid> destination_ids = [];
 	uint16 data_type = 65535;
 	datetime created_after = future;
 	datetime created_before = future;
