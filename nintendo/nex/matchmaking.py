@@ -26,6 +26,12 @@ class Gathering(common.Structure):
 		self.state = 0
 		self.description = ""
 	
+	def __key(self):
+		return (self.id, self.owner, self.host, self.min_participants, self.max_participants, self.participation_policy, self.policy_argument, self.flags, self.state, self.description, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -69,6 +75,12 @@ class GatheringURLs(common.Structure):
 		self.gid = None
 		self.urls = None
 	
+	def __key(self):
+		return (self.gid, self.urls, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -98,6 +110,12 @@ class GatheringStats(common.Structure):
 		self.pid = None
 		self.flags = None
 		self.values = None
+	
+	def __key(self):
+		return (self.pid, self.flags, self.values, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -131,6 +149,12 @@ class Invitation(common.Structure):
 		self.guest = None
 		self.message = None
 	
+	def __key(self):
+		return (self.gid, self.guest, self.message, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -163,6 +187,12 @@ class ParticipantDetails(common.Structure):
 		self.name = None
 		self.message = None
 		self.participants = None
+	
+	def __key(self):
+		return (self.pid, self.name, self.message, self.participants, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -198,6 +228,12 @@ class DeletionEntry(common.Structure):
 		self.pid = None
 		self.reason = None
 	
+	def __key(self):
+		return (self.gid, self.pid, self.reason, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -227,6 +263,12 @@ class MatchmakeParam(common.Structure):
 	def __init__(self):
 		super().__init__()
 		self.param = {}
+	
+	def __key(self):
+		return (self.param, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -266,6 +308,12 @@ class MatchmakeSessionSearchCriteria(common.Structure):
 		self.refer_gid = 0
 		self.codeword = ""
 		self.range = common.ResultRange()
+	
+	def __key(self):
+		return (self.attribs, self.game_mode, self.min_participants, self.max_participants, self.matchmake_system, self.vacant_only, self.exclude_locked, self.exclude_non_host_pid, self.selection_method, self.vacant_participants, self.param, self.exclude_user_password, self.exclude_system_password, self.refer_gid, self.codeword, self.range, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -342,6 +390,12 @@ class MatchmakeSession(Gathering):
 		self.user_password_enabled = False
 		self.system_password_enabled = False
 		self.codeword = ""
+	
+	def __key(self):
+		return (self.id, self.owner, self.host, self.min_participants, self.max_participants, self.participation_policy, self.policy_argument, self.flags, self.state, self.description, self.game_mode, self.attribs, self.open_participation, self.matchmake_system, self.application_data, self.num_participants, self.progress_score, self.session_key, self.option, self.param, self.started_time, self.user_password, self.refer_gid, self.user_password_enabled, self.system_password_enabled, self.codeword, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -466,6 +520,12 @@ class MatchmakeBlockListParam(common.Structure):
 		super().__init__()
 		self.options = 0
 	
+	def __key(self):
+		return (self.options, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -494,6 +554,12 @@ class CreateMatchmakeSessionParam(common.Structure):
 		self.options = None
 		self.join_message = None
 		self.num_participants = None
+	
+	def __key(self):
+		return (self.session, self.additional_participants, self.gid_for_participation_check, self.options, self.join_message, self.num_participants, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -540,6 +606,12 @@ class JoinMatchmakeSessionParam(common.Structure):
 		self.num_participants = None
 		self.extra_participants = None
 		self.block_list = MatchmakeBlockListParam()
+	
+	def __key(self):
+		return (self.gid, self.participants, self.gid_for_participation_check, self.options, self.behavior, self.user_password, self.system_password, self.join_message, self.num_participants, self.extra_participants, self.block_list, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -602,6 +674,12 @@ class UpdateMatchmakeSessionParam(common.Structure):
 		self.participation_policy = None
 		self.policy_argument = None
 		self.codeword = None
+	
+	def __key(self):
+		return (self.gid, self.modification_flags, self.attributes, self.open_participation, self.application_buffer, self.progress_score, self.param, self.started_time, self.user_password, self.game_mode, self.description, self.min_participants, self.max_participants, self.matchmake_system, self.participation_policy, self.policy_argument, self.codeword, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -669,6 +747,12 @@ class AutoMatchmakeParam(common.Structure):
 		self.target_gids = None
 		self.block_list = MatchmakeBlockListParam()
 	
+	def __key(self):
+		return (self.session, self.participants, self.gid_for_participation_check, self.options, self.join_message, self.num_participants, self.search_criteria, self.target_gids, self.block_list, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -713,6 +797,12 @@ class FindMatchmakeSessionByParticipantParam(common.Structure):
 		self.options = None
 		self.block_list = MatchmakeBlockListParam()
 	
+	def __key(self):
+		return (self.pids, self.options, self.block_list, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -743,6 +833,12 @@ class FindMatchmakeSessionByParticipantResult(common.Structure):
 		super().__init__()
 		self.pid = None
 		self.session = MatchmakeSession()
+	
+	def __key(self):
+		return (self.pid, self.session, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -778,6 +874,12 @@ class PersistentGathering(Gathering):
 		self.participation_end = None
 		self.matchmake_session_count = None
 		self.num_participants = None
+	
+	def __key(self):
+		return (self.id, self.owner, self.host, self.min_participants, self.max_participants, self.participation_policy, self.policy_argument, self.flags, self.state, self.description, self.type, self.password, self.attribs, self.application_buffer, self.participation_start, self.participation_end, self.matchmake_session_count, self.num_participants, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -821,6 +923,12 @@ class SimpleCommunity(common.Structure):
 		self.gid = None
 		self.matchmake_session_count = None
 	
+	def __key(self):
+		return (self.gid, self.matchmake_session_count, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -849,6 +957,12 @@ class PlayingSession(common.Structure):
 		super().__init__()
 		self.pid = None
 		self.gathering = None
+	
+	def __key(self):
+		return (self.pid, self.gathering, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -880,6 +994,12 @@ class SimplePlayingSession(common.Structure):
 		self.gid = None
 		self.game_mode = None
 		self.attribute = None
+	
+	def __key(self):
+		return (self.pid, self.gid, self.game_mode, self.attribute, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -917,6 +1037,12 @@ class MatchmakeRefereeRound(common.Structure):
 		self.personal_data_category = None
 		self.results = None
 	
+	def __key(self):
+		return (self.id, self.gid, self.state, self.personal_data_category, self.results, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -953,6 +1079,12 @@ class MatchmakeRefereeStartRoundParam(common.Structure):
 		self.gid = None
 		self.pids = None
 	
+	def __key(self):
+		return (self.personal_data_category, self.gid, self.pids, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -983,6 +1115,12 @@ class MatchmakeRefereeEndRoundParam(common.Structure):
 		super().__init__()
 		self.round_id = None
 		self.results = None
+	
+	def __key(self):
+		return (self.round_id, self.results, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -1015,6 +1153,12 @@ class MatchmakeRefereePersonalRoundResult(common.Structure):
 		self.round_win_loss = None
 		self.rating_change = None
 		self.buffer = None
+	
+	def __key(self):
+		return (self.pid, self.personal_round_result_flag, self.round_win_loss, self.rating_change, self.buffer, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -1064,6 +1208,12 @@ class MatchmakeRefereeStats(common.Structure):
 		self.total_loss = None
 		self.total_draw = None
 		self.rating_value = None
+	
+	def __key(self):
+		return (self.unique_id, self.category, self.pid, self.recent_disconnection, self.recent_violation, self.recent_mismatch, self.recent_win, self.recent_loss, self.recent_draw, self.total_disconnect, self.total_violation, self.total_mismatch, self.total_win, self.total_loss, self.total_draw, self.rating_value, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -1122,6 +1272,12 @@ class MatchmakeRefereeStatsTarget(common.Structure):
 		self.pid = None
 		self.category = None
 	
+	def __key(self):
+		return (self.pid, self.category, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -1150,6 +1306,12 @@ class MatchmakeRefereeStatsInitParam(common.Structure):
 		super().__init__()
 		self.category = None
 		self.initial_rating = None
+	
+	def __key(self):
+		return (self.category, self.initial_rating, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):

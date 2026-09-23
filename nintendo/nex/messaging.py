@@ -19,6 +19,12 @@ class MessageRecipient(common.Structure):
 		self.pid = None
 		self.gid = None
 	
+	def __key(self):
+		return (self.type, self.pid, self.gid, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -56,6 +62,12 @@ class UserMessage(common.Data):
 		self.subject = None
 		self.sender_name = None
 		self.recipient = MessageRecipient()
+	
+	def __key(self):
+		return (self.id, self.parent_id, self.sender, self.reception_time, self.life_time, self.flags, self.subject, self.sender_name, self.recipient, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -100,6 +112,12 @@ class TextMessage(UserMessage):
 		super().__init__()
 		self.body = None
 	
+	def __key(self):
+		return (self.id, self.parent_id, self.sender, self.reception_time, self.life_time, self.flags, self.subject, self.sender_name, self.recipient, self.body, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -126,6 +144,12 @@ class BinaryMessage(UserMessage):
 	def __init__(self):
 		super().__init__()
 		self.body = None
+	
+	def __key(self):
+		return (self.id, self.parent_id, self.sender, self.reception_time, self.life_time, self.flags, self.subject, self.sender_name, self.recipient, self.body, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):

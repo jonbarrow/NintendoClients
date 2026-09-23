@@ -15,6 +15,12 @@ class AuthenticationInfo(common.Data):
 		self.token_type = 1
 		self.server_version = 0
 	
+	def __key(self):
+		return (self.token, self.ngs_version, self.token_type, self.server_version, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -50,6 +56,12 @@ class RVConnectionData(common.Structure):
 		self.special_protocols = []
 		self.special_station = common.StationURL.parse("prudp:/")
 		self.server_time = common.DateTime(0)
+	
+	def __key(self):
+		return (self.main_station, self.special_protocols, self.special_station, self.server_time, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -98,6 +110,12 @@ class ValidateAndRequestTicketParam(common.Structure):
 		self.nex_version = None
 		self.client_version = None
 	
+	def __key(self):
+		return (self.platform, self.username, self.data, self.skip_version_check, self.nex_version, self.client_version, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -138,6 +156,12 @@ class ValidateAndRequestTicketResult(common.Structure):
 		self.server_time = None
 		self.server_name = None
 		self.source_key = None
+	
+	def __key(self):
+		return (self.pid, self.ticket, self.server_url, self.server_time, self.server_name, self.source_key, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):

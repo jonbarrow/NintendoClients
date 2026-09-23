@@ -20,6 +20,12 @@ class AccountData(common.Structure):
 		self.expiry_date = None
 		self.expired_message = None
 	
+	def __key(self):
+		return (self.pid, self.name, self.groups, self.email, self.creation_date, self.effective_date, self.not_effective_message, self.expiry_date, self.expired_message, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -62,6 +68,12 @@ class BasicAccountInfo(common.Structure):
 		super().__init__()
 		self.pid = None
 		self.name = None
+	
+	def __key(self):
+		return (self.pid, self.name, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):

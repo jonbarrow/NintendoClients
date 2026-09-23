@@ -26,6 +26,12 @@ class Ranking2CategorySetting(common.Structure):
 		self.max_seasons_to_go_back = None
 		self.score_order = None
 	
+	def __key(self):
+		return (self.min_score, self.max_score, self.lowest_rank, self.reset_month, self.reset_day, self.reset_hour, self.reset_mode, self.max_seasons_to_go_back, self.score_order, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -84,6 +90,12 @@ class Ranking2ChartInfo(common.Structure):
 		self.attribute1 = None
 		self.attribute2 = None
 		self.quantities = None
+	
+	def __key(self):
+		return (self.create_time, self.index, self.category, self.season, self.bins_size, self.sampling_rate, self.score_order, self.estimate_length, self.estimate_highest_score, self.estimate_lowest_score, self.estimate_median_score, self.estimate_average_score, self.highest_bins_score, self.lowest_bins_score, self.bins_width, self.attribute1, self.attribute2, self.quantities, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -146,6 +158,12 @@ class Ranking2ChartInfoInput(common.Structure):
 		self.chart_index = None
 		self.seasons_to_go_back = None
 	
+	def __key(self):
+		return (self.chart_index, self.seasons_to_go_back, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -175,6 +193,12 @@ class Ranking2CommonData(common.Structure):
 		self.username = None
 		self.mii = None
 		self.binary_data = None
+	
+	def __key(self):
+		return (self.username, self.mii, self.binary_data, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -207,6 +231,12 @@ class Ranking2EstimateScoreRankInput(common.Structure):
 		self.category = None
 		self.seasons_to_go_back = None
 		self.score = None
+	
+	def __key(self):
+		return (self.category, self.seasons_to_go_back, self.score, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -242,6 +272,12 @@ class Ranking2EstimateScoreRankOutput(common.Structure):
 		self.category = None
 		self.season = None
 		self.sampling_rate = None
+	
+	def __key(self):
+		return (self.rank, self.length, self.score, self.category, self.season, self.sampling_rate, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -283,6 +319,12 @@ class Ranking2GetByListParam(common.Structure):
 		self.sort_flags = None
 		self.option_flags = None
 		self.seasons_to_go_back = None
+	
+	def __key(self):
+		return (self.category, self.offset, self.length, self.sort_flags, self.option_flags, self.seasons_to_go_back, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -327,6 +369,12 @@ class Ranking2GetParam(common.Structure):
 		self.option_flags = 0
 		self.mode = 2
 		self.seasons_to_go_back = 0
+	
+	def __key(self):
+		return (self.unique_id, self.pid, self.category, self.offset, self.count, self.sort_flags, self.option_flags, self.mode, self.seasons_to_go_back, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -373,6 +421,12 @@ class Ranking2Info(common.Structure):
 		self.num_entries = None
 		self.season = None
 	
+	def __key(self):
+		return (self.data, self.lowest_rank, self.num_entries, self.season, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -409,6 +463,12 @@ class Ranking2RankData(common.Structure):
 		self.rank = None
 		self.score = None
 		self.common_data = Ranking2CommonData()
+	
+	def __key(self):
+		return (self.misc, self.unique_id, self.pid, self.rank, self.score, self.common_data, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -447,6 +507,12 @@ class Ranking2ScoreData(common.Structure):
 		self.misc = None
 		self.category = None
 		self.score = None
+	
+	def __key(self):
+		return (self.misc, self.category, self.score, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):

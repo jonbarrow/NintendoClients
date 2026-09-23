@@ -821,6 +821,8 @@ class CodeGenerator:
 		stream.indent()
 		
 		self.generate_struct_init(stream, struct)
+		self.generate_struct_key(stream, struct)
+		self.generate_struct_hash(stream)
 		self.generate_struct_eq(stream, struct)
 		self.generate_struct_version(stream, struct)
 		self.generate_struct_check(stream, struct)
@@ -853,6 +855,21 @@ class CodeGenerator:
 			elif isinstance(field, Condition):
 				self.generate_struct_init_body(stream, field.body, defaults)
 	
+	def generate_struct_key(self, stream, struct):
+		fields = self.collect_struct_fields(struct)
+		stream.write_line("def __key(self):")
+		stream.indent()
+		stream.write_line("return (%s)" % "".join("self.%s, " % field for field in fields))
+		stream.unindent()
+		stream.write_line()
+
+	def generate_struct_hash(self, stream):
+		stream.write_line("def __hash__(self):")
+		stream.indent()
+		stream.write_line("return hash(common.make_hashable(self.__key()))")
+		stream.unindent()
+		stream.write_line()
+
 	def generate_struct_eq(self, stream, struct):
 		fields = self.collect_struct_fields(struct)
 		stream.write_line("def __eq__(self, other):")

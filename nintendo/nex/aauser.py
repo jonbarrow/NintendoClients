@@ -13,6 +13,12 @@ class ApplicationInfo(common.Structure):
 		self.title_id = None
 		self.title_version = None
 	
+	def __key(self):
+		return (self.title_id, self.title_version, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented

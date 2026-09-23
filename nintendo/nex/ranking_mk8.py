@@ -37,6 +37,12 @@ class RankingOrderParam(common.Structure):
 		self.offset = 0
 		self.count = 10
 	
+	def __key(self):
+		return (self.order_calc, self.group_index, self.group_num, self.time_scope, self.offset, self.count, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -78,6 +84,12 @@ class RankingRankData(common.Structure):
 		self.param = None
 		self.common_data = None
 		self.update_time = None
+	
+	def __key(self):
+		return (self.pid, self.unique_id, self.rank, self.category, self.score, self.groups, self.param, self.common_data, self.update_time, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -129,6 +141,12 @@ class RankingResult(common.Structure):
 		self.total = None
 		self.since_time = None
 	
+	def __key(self):
+		return (self.data, self.total, self.since_time, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -161,6 +179,12 @@ class RankingCachedResult(RankingResult):
 		self.expired_time = None
 		self.max_length = None
 	
+	def __key(self):
+		return (self.data, self.total, self.since_time, self.created_time, self.expired_time, self.max_length, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -192,6 +216,12 @@ class RankingStats(common.Structure):
 		super().__init__()
 		self.stats = None
 	
+	def __key(self):
+		return (self.stats, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -222,6 +252,12 @@ class RankingScoreData(common.Structure):
 		self.update_mode = None
 		self.groups = None
 		self.param = None
+	
+	def __key(self):
+		return (self.category, self.score, self.order, self.update_mode, self.groups, self.param, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -261,6 +297,12 @@ class RankingChangeAttributesParam(common.Structure):
 		self.groups = None
 		self.param = None
 	
+	def __key(self):
+		return (self.flags, self.groups, self.param, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -293,6 +335,12 @@ class CompetitionRankingInfo(common.Structure):
 		self.num_participants = None
 		self.team_scores = None
 	
+	def __key(self):
+		return (self.id, self.num_participants, self.team_scores, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -323,6 +371,12 @@ class CompetitionRankingInfoGetParam(common.Structure):
 		super().__init__()
 		self.rank_order = None
 		self.range = common.ResultRange()
+	
+	def __key(self):
+		return (self.rank_order, self.range, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -358,6 +412,12 @@ class CompetitionRankingUploadScoreParam(common.Structure):
 		self.team_score = None
 		self.is_first_upload = None
 		self.metadata = None
+	
+	def __key(self):
+		return (self.id, self.season_id, self.unk3, self.score, self.team_id, self.team_score, self.is_first_upload, self.metadata, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):

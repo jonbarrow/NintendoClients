@@ -1,7 +1,7 @@
 
 from nintendo.nex.errors import error_names, error_codes
 from nintendo.nex import settings, streams
-from typing import Self
+from typing import Any, Self
 
 import datetime
 import time
@@ -11,6 +11,14 @@ logger = logging.getLogger(__name__)
 
 
 ERROR_MASK = 1 << 31
+
+
+def make_hashable(value: Any) -> Any:
+	if isinstance(value, (list, tuple)):
+		return tuple(make_hashable(item) for item in value)
+	if isinstance(value, dict):
+		return tuple(sorted((key, make_hashable(item)) for key, item in value.items()))
+	return value
 
 
 class RMCError(Exception):
@@ -37,6 +45,12 @@ class Result:
 
 	def __init__(self, code: int = 0x10001):
 		self._code = code
+	
+	def __key(self) -> tuple:
+		return (self._code,)
+	
+	def __hash__(self) -> int:
+		return hash(make_hashable(self.__key()))
 	
 	def __eq__(self, other: object) -> bool:
 		if type(self) is not type(other):
@@ -136,6 +150,12 @@ class Structure:
 	
 	
 class Data(Structure):
+	def __key(self) -> tuple:
+		return ()
+
+	def __hash__(self) -> int:
+		return hash(make_hashable(self.__key()))
+
 	def __eq__(self, other: object) -> bool:
 		if type(self) is not type(other):
 			return NotImplemented
@@ -155,6 +175,12 @@ class DataHolder:
 
 	def __init__(self):
 		self.data = Data()
+		
+	def __key(self) -> tuple:
+		return (self.data,)
+		
+	def __hash__(self) -> int:
+		return hash(make_hashable(self.__key()))
 		
 	def __eq__(self, other: object) -> bool:
 		if type(self) is not type(other):
@@ -181,6 +207,12 @@ class DataHolder:
 		
 		
 class NullData(Data):
+	def __key(self) -> tuple:
+		return ()
+
+	def __hash__(self) -> int:
+		return hash(make_hashable(self.__key()))
+
 	def __eq__(self, other: object) -> bool:
 		if type(self) is not type(other):
 			return NotImplemented
@@ -204,6 +236,12 @@ class StationURL:
 	def __init__(self, scheme="prudp", **kwargs):
 		self.urlscheme = scheme
 		self.params = kwargs
+
+	def __key(self):
+		return (self.urlscheme, self.params)
+
+	def __hash__(self):
+		return hash(make_hashable(self.__key()))
 
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -258,6 +296,12 @@ class DateTime:
 
 	def __init__(self, value: int):
 		self._value = value
+		
+	def __key(self) -> tuple:
+		return (self._value,)
+		
+	def __hash__(self) -> int:
+		return hash(make_hashable(self.__key()))
 		
 	def __eq__(self, other: object) -> bool:
 		if type(self) is not type(other):
@@ -321,6 +365,12 @@ class ResultRange(Structure):
 	def __init__(self, offset: int = 0, size: int = 10):
 		self.offset = offset
 		self.size = size
+
+	def __key(self) -> tuple:
+		return (self.offset, self.size)
+
+	def __hash__(self) -> int:
+		return hash(make_hashable(self.__key()))
 
 	def __eq__(self, other: object) -> bool:
 		if type(self) is not type(other):

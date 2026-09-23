@@ -14,6 +14,12 @@ class AccountExtraInfo(common.Structure):
 		self.move_count = None
 		self.token = None
 	
+	def __key(self):
+		return (self.local_friend_code, self.move_count, self.token, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -45,6 +51,12 @@ class FriendComment(common.Data):
 		self.pid = None
 		self.comment = None
 		self.modified_at = None
+	
+	def __key(self):
+		return (self.pid, self.comment, self.modified_at, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -78,6 +90,12 @@ class FriendKey(common.Structure):
 		self.unk1 = None
 		self.unk2 = None
 	
+	def __key(self):
+		return (self.unk1, self.unk2, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -107,6 +125,12 @@ class FriendMii(common.Data):
 		self.pid = None
 		self.mii = Mii()
 		self.modified_at = None
+	
+	def __key(self):
+		return (self.pid, self.mii, self.modified_at, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -140,6 +164,12 @@ class FriendMiiList(common.Data):
 		self.unk1 = None
 		self.mii = MiiList()
 		self.unk2 = None
+	
+	def __key(self):
+		return (self.unk1, self.mii, self.unk2, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -181,6 +211,12 @@ class FriendPersistentInfo(common.Data):
 		self.message_updated = None
 		self.friended = None
 		self.last_online = None
+	
+	def __key(self):
+		return (self.pid, self.region, self.country, self.area, self.language, self.platform, self.game_key, self.message, self.message_updated, self.friended, self.last_online, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -231,6 +267,12 @@ class FriendPicture(common.Data):
 		self.data = None
 		self.datetime = None
 	
+	def __key(self):
+		return (self.unk, self.data, self.datetime, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -263,6 +305,12 @@ class FriendPresence(common.Data):
 		self.pid = None
 		self.presence = NintendoPresence()
 	
+	def __key(self):
+		return (self.pid, self.presence, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -293,6 +341,12 @@ class FriendRelationship(common.Data):
 		self.pid = None
 		self.friend_code = None
 		self.is_complete = None
+	
+	def __key(self):
+		return (self.pid, self.friend_code, self.is_complete, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -326,6 +380,12 @@ class GameKey(common.Data):
 		self.title_id = 0
 		self.title_version = 0
 	
+	def __key(self):
+		return (self.title_id, self.title_version, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -355,6 +415,12 @@ class Mii(common.Data):
 		self.unk1 = None
 		self.unk2 = None
 		self.mii_data = None
+	
+	def __key(self):
+		return (self.name, self.unk1, self.unk2, self.mii_data, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -391,6 +457,12 @@ class MiiList(common.Data):
 		self.unk2 = None
 		self.unk3 = None
 		self.mii_datas = None
+	
+	def __key(self):
+		return (self.unk1, self.unk2, self.unk3, self.mii_datas, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -431,6 +503,12 @@ class MyProfile(common.Data):
 		self.local_friend_code_seed = None
 		self.mac_address = None
 		self.serial_number = None
+	
+	def __key(self):
+		return (self.region, self.country, self.area, self.language, self.platform, self.local_friend_code_seed, self.mac_address, self.serial_number, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -482,6 +560,12 @@ class NintendoPresence(common.Data):
 		self.join_group_id = None
 		self.application_data = None
 	
+	def __key(self):
+		return (self.changed_bit_flag, self.game_key, self.game_mode_description, self.join_availability_flag, self.matchmake_system_type, self.join_game_id, self.join_game_mode, self.owner_pid, self.join_group_id, self.application_data, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -528,6 +612,12 @@ class PlayedGame(common.Data):
 		self.game_key = GameKey()
 		self.datetime = None
 	
+	def __key(self):
+		return (self.game_key, self.datetime, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -558,6 +648,12 @@ class BlacklistedPrincipal(common.Data):
 		self.principal_info = PrincipalBasicInfo()
 		self.game_key = GameKey()
 		self.since = None
+	
+	def __key(self):
+		return (self.principal_info, self.game_key, self.since, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -591,6 +687,12 @@ class Comment(common.Data):
 		self.unk = None
 		self.text = None
 		self.changed = None
+	
+	def __key(self):
+		return (self.unk, self.text, self.changed, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -627,6 +729,12 @@ class FriendInfo(common.Data):
 		self.befriended = None
 		self.last_online = None
 		self.unk = None
+	
+	def __key(self):
+		return (self.nna_info, self.presence, self.comment, self.befriended, self.last_online, self.unk, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -667,6 +775,12 @@ class FriendRequest(common.Data):
 		self.message = FriendRequestMessage()
 		self.sent = None
 	
+	def __key(self):
+		return (self.principal_info, self.message, self.sent, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -705,6 +819,12 @@ class FriendRequestMessage(common.Data):
 		self.game_key = GameKey()
 		self.datetime = None
 		self.expires = None
+	
+	def __key(self):
+		return (self.friend_request_id, self.unk1, self.unk2, self.message, self.unk3, self.string, self.game_key, self.datetime, self.expires, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -753,6 +873,12 @@ class MiiV2(common.Data):
 		self.data = None
 		self.datetime = common.DateTime(0)
 	
+	def __key(self):
+		return (self.name, self.unk1, self.unk2, self.data, self.datetime, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -790,6 +916,12 @@ class NNAInfo(common.Data):
 		self.unk1 = 94
 		self.unk2 = 11
 	
+	def __key(self):
+		return (self.principal_info, self.unk1, self.unk2, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -821,6 +953,12 @@ class NintendoCreateAccountData(common.Data):
 		self.token = None
 		self.birthday = None
 		self.unk = None
+	
+	def __key(self):
+		return (self.info, self.token, self.birthday, self.unk, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -868,6 +1006,12 @@ class NintendoPresenceV2(common.Data):
 		self.unk5 = 3
 		self.unk6 = 3
 		self.unk7 = 3
+	
+	def __key(self):
+		return (self.flags, self.is_online, self.game_key, self.unk1, self.message, self.unk2, self.unk3, self.game_server_id, self.unk4, self.pid, self.gathering_id, self.application_data, self.unk5, self.unk6, self.unk7, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -926,6 +1070,12 @@ class PersistentNotification(common.Data):
 		self.unk4 = None
 		self.string = None
 	
+	def __key(self):
+		return (self.unk1, self.unk2, self.unk3, self.unk4, self.string, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -964,6 +1114,12 @@ class PrincipalBasicInfo(common.Data):
 		self.mii = MiiV2()
 		self.unk = 2
 	
+	def __key(self):
+		return (self.pid, self.nnid, self.mii, self.unk, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -999,6 +1155,12 @@ class PrincipalPreference(common.Data):
 		self.show_current_title = None
 		self.block_friend_requests = None
 	
+	def __key(self):
+		return (self.show_online_status, self.show_current_title, self.block_friend_requests, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -1030,6 +1192,12 @@ class PrincipalRequestBlockSetting(common.Data):
 		super().__init__()
 		self.pid = None
 		self.blocked = None
+	
+	def __key(self):
+		return (self.pid, self.blocked, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):

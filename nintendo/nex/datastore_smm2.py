@@ -125,6 +125,12 @@ class DataStoreChangeMetaCompareParam(common.Structure):
 		self.data_type = None
 		self.status = None
 	
+	def __key(self):
+		return (self.comparison_flag, self.name, self.permission, self.delete_permission, self.period, self.meta_binary, self.tags, self.referred_count, self.data_type, self.status, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -181,6 +187,12 @@ class DataStoreChangeMetaParam(common.Structure):
 		self.status = None
 		self.compare_param = DataStoreChangeMetaCompareParam()
 		self.persistence_target = DataStorePersistenceTarget()
+	
+	def __key(self):
+		return (self.data_id, self.modifies_flag, self.name, self.permission, self.delete_permission, self.period, self.meta_binary, self.tags, self.update_password, self.referred_count, self.data_type, self.status, self.compare_param, self.persistence_target, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -242,6 +254,12 @@ class DataStoreChangeMetaParamV1(common.Structure):
 		self.tags = None
 		self.update_password = None
 	
+	def __key(self):
+		return (self.data_id, self.modifies_flag, self.name, self.permission, self.delete_permission, self.period, self.meta_binary, self.tags, self.update_password, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -285,6 +303,12 @@ class DataStoreCompletePostParam(common.Structure):
 		self.data_id = None
 		self.success = None
 	
+	def __key(self):
+		return (self.data_id, self.success, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -313,6 +337,12 @@ class DataStoreCompletePostParamV1(common.Structure):
 		super().__init__()
 		self.data_id = None
 		self.success = None
+	
+	def __key(self):
+		return (self.data_id, self.success, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -343,6 +373,12 @@ class DataStoreCompleteUpdateParam(common.Structure):
 		self.data_id = None
 		self.version = None
 		self.success = None
+	
+	def __key(self):
+		return (self.data_id, self.version, self.success, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -375,6 +411,12 @@ class DataStoreDeleteParam(common.Structure):
 		self.data_id = None
 		self.update_password = None
 	
+	def __key(self):
+		return (self.data_id, self.update_password, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -405,6 +447,12 @@ class DataStoreGetMetaParam(common.Structure):
 		self.persistence_target = DataStorePersistenceTarget()
 		self.result_option = 0
 		self.access_password = 0
+	
+	def __key(self):
+		return (self.data_id, self.persistence_target, self.result_option, self.access_password, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -437,6 +485,12 @@ class DataStoreGetNewArrivedNotificationsParam(common.Structure):
 		self.last_notification_id = None
 		self.limit = None
 	
+	def __key(self):
+		return (self.last_notification_id, self.limit, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -465,6 +519,12 @@ class DataStoreGetNotificationUrlParam(common.Structure):
 		super().__init__()
 		self.previous_url = None
 	
+	def __key(self):
+		return (self.previous_url, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -490,6 +550,12 @@ class DataStoreGetSpecificMetaParam(common.Structure):
 	def __init__(self):
 		super().__init__()
 		self.data_ids = None
+	
+	def __key(self):
+		return (self.data_ids, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -517,6 +583,12 @@ class DataStoreGetSpecificMetaParamV1(common.Structure):
 		super().__init__()
 		self.data_ids = None
 	
+	def __key(self):
+		return (self.data_ids, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -543,6 +615,12 @@ class DataStoreKeyValue(common.Structure):
 		super().__init__()
 		self.key = None
 		self.value = None
+	
+	def __key(self):
+		return (self.key, self.value, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -589,6 +667,12 @@ class DataStoreMetaInfo(common.Structure):
 		self.expire_time = None
 		self.tags = None
 		self.ratings = None
+	
+	def __key(self):
+		return (self.data_id, self.owner_id, self.size, self.name, self.data_type, self.meta_binary, self.permission, self.delete_permission, self.create_time, self.update_time, self.period, self.status, self.referred_count, self.refer_data_id, self.flag, self.referred_time, self.expire_time, self.tags, self.ratings, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -653,6 +737,12 @@ class DataStoreNotification(common.Structure):
 		self.notification_id = None
 		self.data_id = None
 	
+	def __key(self):
+		return (self.notification_id, self.data_id, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -681,6 +771,12 @@ class DataStoreNotificationV1(common.Structure):
 		super().__init__()
 		self.notification_id = None
 		self.data_id = None
+	
+	def __key(self):
+		return (self.notification_id, self.data_id, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -711,6 +807,12 @@ class DataStorePasswordInfo(common.Structure):
 		self.data_id = None
 		self.access_password = None
 		self.update_password = None
+	
+	def __key(self):
+		return (self.data_id, self.access_password, self.update_password, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -743,6 +845,12 @@ class DataStorePermission(common.Structure):
 		self.permission = 3
 		self.recipients = []
 	
+	def __key(self):
+		return (self.permission, self.recipients, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -770,6 +878,12 @@ class DataStorePersistenceInfo(common.Structure):
 		self.owner_id = None
 		self.slot_id = None
 		self.data_id = None
+	
+	def __key(self):
+		return (self.owner_id, self.slot_id, self.data_id, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -802,6 +916,12 @@ class DataStorePersistenceInitParam(common.Structure):
 		self.persistence_id = 65535
 		self.delete_last_object = True
 	
+	def __key(self):
+		return (self.persistence_id, self.delete_last_object, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -828,6 +948,12 @@ class DataStorePersistenceTarget(common.Structure):
 		super().__init__()
 		self.owner_id = 0
 		self.persistence_id = 65535
+	
+	def __key(self):
+		return (self.owner_id, self.persistence_id, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -858,6 +984,12 @@ class DataStorePrepareGetParam(common.Structure):
 		self.persistence_target = DataStorePersistenceTarget()
 		self.access_password = 0
 		self.extra_data = []
+	
+	def __key(self):
+		return (self.data_id, self.lock_id, self.persistence_target, self.access_password, self.extra_data, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -894,6 +1026,12 @@ class DataStorePrepareGetParamV1(common.Structure):
 		super().__init__()
 		self.data_id = None
 		self.lock_id = 0
+	
+	def __key(self):
+		return (self.data_id, self.lock_id, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -934,6 +1072,12 @@ class DataStorePreparePostParam(common.Structure):
 		self.rating_init_param = []
 		self.persistence_init_param = DataStorePersistenceInitParam()
 		self.extra_data = None
+	
+	def __key(self):
+		return (self.size, self.name, self.data_type, self.meta_binary, self.permission, self.delete_permission, self.flag, self.period, self.refer_data_id, self.tags, self.rating_init_param, self.persistence_init_param, self.extra_data, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -1001,6 +1145,12 @@ class DataStorePreparePostParamV1(common.Structure):
 		self.tags = None
 		self.rating_init_param = None
 	
+	def __key(self):
+		return (self.size, self.name, self.data_type, self.meta_binary, self.permission, self.delete_permission, self.flag, self.period, self.refer_data_id, self.tags, self.rating_init_param, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -1050,6 +1200,12 @@ class DataStorePrepareUpdateParam(common.Structure):
 		self.update_password = None
 		self.extra_data = None
 	
+	def __key(self):
+		return (self.data_id, self.size, self.update_password, self.extra_data, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -1083,6 +1239,12 @@ class DataStoreRateObjectParam(common.Structure):
 		self.rating_value = None
 		self.access_password = None
 	
+	def __key(self):
+		return (self.rating_value, self.access_password, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -1112,6 +1274,12 @@ class DataStoreRatingInfo(common.Structure):
 		self.total_value = None
 		self.count = None
 		self.initial_value = None
+	
+	def __key(self):
+		return (self.total_value, self.count, self.initial_value, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -1143,6 +1311,12 @@ class DataStoreRatingInfoWithSlot(common.Structure):
 		super().__init__()
 		self.slot = None
 		self.info = DataStoreRatingInfo()
+	
+	def __key(self):
+		return (self.slot, self.info, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -1178,6 +1352,12 @@ class DataStoreRatingInitParam(common.Structure):
 		self.range_max = None
 		self.period_hour = None
 		self.period_duration = None
+	
+	def __key(self):
+		return (self.flag, self.internal_flag, self.lock_type, self.initial_value, self.range_min, self.range_max, self.period_hour, self.period_duration, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -1220,6 +1400,12 @@ class DataStoreRatingInitParamWithSlot(common.Structure):
 		self.slot = None
 		self.param = DataStoreRatingInitParam()
 	
+	def __key(self):
+		return (self.slot, self.param, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -1250,6 +1436,12 @@ class DataStoreRatingLog(common.Structure):
 		self.pid = None
 		self.rating_value = None
 		self.lock_expiration_time = None
+	
+	def __key(self):
+		return (self.is_rated, self.pid, self.rating_value, self.lock_expiration_time, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -1284,6 +1476,12 @@ class DataStoreRatingTarget(common.Structure):
 		self.data_id = None
 		self.slot = None
 	
+	def __key(self):
+		return (self.data_id, self.slot, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -1314,6 +1512,12 @@ class DataStoreReqGetAdditionalMeta(common.Structure):
 		self.data_type = None
 		self.version = None
 		self.meta_binary = None
+	
+	def __key(self):
+		return (self.owner_id, self.data_type, self.version, self.meta_binary, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -1350,6 +1554,12 @@ class DataStoreReqGetInfo(common.Structure):
 		self.size = None
 		self.root_ca_cert = None
 		self.data_id = None
+	
+	def __key(self):
+		return (self.url, self.headers, self.size, self.root_ca_cert, self.data_id, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -1394,6 +1604,12 @@ class DataStoreReqGetInfoV1(common.Structure):
 		self.size = None
 		self.root_ca_cert = None
 	
+	def __key(self):
+		return (self.url, self.headers, self.size, self.root_ca_cert, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -1428,6 +1644,12 @@ class DataStoreReqGetNotificationUrlInfo(common.Structure):
 		self.key = None
 		self.query = None
 		self.root_ca_cert = None
+	
+	def __key(self):
+		return (self.url, self.key, self.query, self.root_ca_cert, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -1464,6 +1686,12 @@ class DataStoreReqPostInfo(common.Structure):
 		self.headers = None
 		self.form = None
 		self.root_ca_cert = None
+	
+	def __key(self):
+		return (self.data_id, self.url, self.headers, self.form, self.root_ca_cert, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -1503,6 +1731,12 @@ class DataStoreReqPostInfoV1(common.Structure):
 		self.form = None
 		self.root_ca_cert = None
 	
+	def __key(self):
+		return (self.data_id, self.url, self.headers, self.form, self.root_ca_cert, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -1540,6 +1774,12 @@ class DataStoreReqUpdateInfo(common.Structure):
 		self.headers = None
 		self.form = None
 		self.root_ca_cert = None
+	
+	def __key(self):
+		return (self.version, self.url, self.headers, self.form, self.root_ca_cert, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -1592,6 +1832,12 @@ class DataStoreSearchParam(common.Structure):
 		self.use_cache = False
 		self.total_count_enabled = True
 		self.data_types = []
+	
+	def __key(self):
+		return (self.search_target, self.owner_ids, self.owner_type, self.destination_ids, self.data_type, self.created_after, self.created_before, self.updated_after, self.updated_before, self.refer_data_id, self.tags, self.result_order_column, self.result_order, self.result_range, self.result_option, self.minimal_rating_frequency, self.use_cache, self.total_count_enabled, self.data_types, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -1655,6 +1901,12 @@ class DataStoreSearchResult(common.Structure):
 		self.result = None
 		self.total_count_type = None
 	
+	def __key(self):
+		return (self.total_count, self.result, self.total_count_type, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -1688,6 +1940,12 @@ class DataStoreSpecificMetaInfo(common.Structure):
 		self.size = None
 		self.data_type = None
 		self.version = None
+	
+	def __key(self):
+		return (self.data_id, self.owner_id, self.size, self.data_type, self.version, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -1727,6 +1985,12 @@ class DataStoreSpecificMetaInfoV1(common.Structure):
 		self.data_type = None
 		self.version = None
 	
+	def __key(self):
+		return (self.data_id, self.owner_id, self.size, self.data_type, self.version, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -1763,6 +2027,12 @@ class DataStoreTouchObjectParam(common.Structure):
 		self.lock_id = None
 		self.access_password = None
 	
+	def __key(self):
+		return (self.data_id, self.lock_id, self.access_password, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -1794,6 +2064,12 @@ class GetCoursesParam(common.Structure):
 		self.data_ids = None
 		self.option = 0
 	
+	def __key(self):
+		return (self.data_ids, self.option, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -1821,6 +2097,12 @@ class GetCoursesEventParam(common.Structure):
 	def __init__(self):
 		super().__init__()
 	
+	def __key(self):
+		return ()
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -1841,6 +2123,12 @@ class SearchCommentsInOrderParam(common.Structure):
 		super().__init__()
 		self.data_id = None
 		self.range = common.ResultRange()
+	
+	def __key(self):
+		return (self.data_id, self.range, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -1872,6 +2160,12 @@ class GetEventCourseGhostParam(common.Structure):
 		self.time = None
 		self.count = None
 	
+	def __key(self):
+		return (self.data_id, self.time, self.count, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -1902,6 +2196,12 @@ class GetEventCourseHistogramParam(common.Structure):
 		super().__init__()
 		self.data_id = None
 	
+	def __key(self):
+		return (self.data_id, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -1929,6 +2229,12 @@ class GetUserOrCourseParam(common.Structure):
 		self.code = None
 		self.user_option = 0
 		self.course_option = 0
+	
+	def __key(self):
+		return (self.code, self.user_option, self.course_option, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -1960,6 +2266,12 @@ class GetUsersParam(common.Structure):
 		super().__init__()
 		self.pids = None
 		self.option = 0
+	
+	def __key(self):
+		return (self.pids, self.option, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -1993,6 +2305,12 @@ class RegisterUserParam(common.Structure):
 		self.language = None
 		self.country = None
 		self.device_id = None
+	
+	def __key(self):
+		return (self.name, self.unk1, self.unk2, self.language, self.country, self.device_id, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -2032,6 +2350,12 @@ class SearchCoursesPostedByParam(common.Structure):
 		self.range = common.ResultRange()
 		self.pids = None
 	
+	def __key(self):
+		return (self.option, self.range, self.pids, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -2063,6 +2387,12 @@ class SearchCoursesPositiveRatedByParam(common.Structure):
 		self.option = 0
 		self.count = None
 		self.pid = None
+	
+	def __key(self):
+		return (self.option, self.count, self.pid, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -2096,6 +2426,12 @@ class SearchCoursesPlayedByParam(common.Structure):
 		self.count = None
 		self.pid = None
 	
+	def __key(self):
+		return (self.option, self.count, self.pid, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -2127,6 +2463,12 @@ class SearchCoursesEndlessModeParam(common.Structure):
 		self.option = 0
 		self.count = None
 		self.difficulty = None
+	
+	def __key(self):
+		return (self.option, self.count, self.difficulty, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -2160,6 +2502,12 @@ class SearchCoursesFirstClearParam(common.Structure):
 		self.option = 0
 		self.range = common.ResultRange()
 	
+	def __key(self):
+		return (self.pid, self.option, self.range, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -2192,6 +2540,12 @@ class SearchCoursesBestTimeParam(common.Structure):
 		self.option = 0
 		self.range = common.ResultRange()
 	
+	def __key(self):
+		return (self.pid, self.option, self.range, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -2222,6 +2576,12 @@ class SearchCoursesEventParam(common.Structure):
 		super().__init__()
 		self.option = 0
 	
+	def __key(self):
+		return (self.option, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -2246,6 +2606,12 @@ class SearchCoursesLatestParam(common.Structure):
 		super().__init__()
 		self.option = 0
 		self.range = common.ResultRange()
+	
+	def __key(self):
+		return (self.option, self.range, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -2274,6 +2640,12 @@ class SearchUsersPlayedCourseParam(common.Structure):
 		self.data_id = None
 		self.option = 0
 		self.count = None
+	
+	def __key(self):
+		return (self.data_id, self.option, self.count, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -2307,6 +2679,12 @@ class SearchUsersClearedCourseParam(common.Structure):
 		self.option = 0
 		self.count = None
 	
+	def __key(self):
+		return (self.data_id, self.option, self.count, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -2338,6 +2716,12 @@ class SearchUsersPositiveRatedCourseParam(common.Structure):
 		self.data_id = None
 		self.option = 0
 		self.count = None
+	
+	def __key(self):
+		return (self.data_id, self.option, self.count, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -2372,6 +2756,12 @@ class SearchCoursesPointRankingParam(common.Structure):
 		self.difficulty = None
 		self.reject_regions = []
 	
+	def __key(self):
+		return (self.option, self.range, self.difficulty, self.reject_regions, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -2405,6 +2795,12 @@ class SearchUsersUserPointParam(common.Structure):
 		self.option = 0
 		self.buffer = None
 		self.range = common.ResultRange()
+	
+	def __key(self):
+		return (self.option, self.buffer, self.range, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -2443,6 +2839,12 @@ class SyncUserProfileParam(common.Structure):
 		self.unk5 = None
 		self.unk_guid = None
 		self.unk6 = None
+	
+	def __key(self):
+		return (self.username, self.unk1, self.unk2, self.unk3, self.country, self.unk4, self.unk5, self.unk_guid, self.unk6, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -2487,6 +2889,12 @@ class GetWorldMapParam(common.Structure):
 		self.ids = None
 		self.option = 0
 	
+	def __key(self):
+		return (self.ids, self.option, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -2515,6 +2923,12 @@ class SearchWorldMapPickUpParam(common.Structure):
 		super().__init__()
 		self.count = None
 	
+	def __key(self):
+		return (self.count, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -2541,6 +2955,12 @@ class SearchWorldMapPlayedByParam(common.Structure):
 		super().__init__()
 		self.unk1 = None
 		self.unk2 = None
+	
+	def __key(self):
+		return (self.unk1, self.unk2, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -2570,6 +2990,12 @@ class BadgeInfo(common.Structure):
 		super().__init__()
 		self.unk1 = None
 		self.unk2 = None
+	
+	def __key(self):
+		return (self.unk1, self.unk2, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -2615,6 +3041,12 @@ class CommentInfo(common.Structure):
 		self.picture = CommentPictureReqGetInfoWithoutHeaders()
 		self.unk16 = None
 		self.unk17 = None
+	
+	def __key(self):
+		return (self.unk1, self.unk2, self.unk3, self.unk4, self.unk5, self.unk6, self.unk7, self.unk8, self.unk9, self.unk10, self.unk11, self.unk12, self.unk13, self.unk14, self.unk15, self.picture, self.unk16, self.unk17, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -2679,6 +3111,12 @@ class DeathPositionInfo(common.Structure):
 		self.y = None
 		self.is_subworld = None
 	
+	def __key(self):
+		return (self.data_id, self.x, self.y, self.is_subworld, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -2714,6 +3152,12 @@ class CommentPictureReqGetInfoWithoutHeaders(common.Structure):
 		self.unk1 = None
 		self.unk2 = None
 		self.filename = None
+	
+	def __key(self):
+		return (self.url, self.data_type, self.unk1, self.unk2, self.filename, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -2774,6 +3218,12 @@ class CourseInfo(common.Structure):
 		self.unk12 = None
 		self.one_screen_thumbnail = RelationObjectReqGetInfo()
 		self.entire_thumbnail = RelationObjectReqGetInfo()
+	
+	def __key(self):
+		return (self.data_id, self.code, self.owner_id, self.name, self.description, self.game_style, self.course_theme, self.upload_time, self.difficulty, self.tag1, self.tag2, self.unk1, self.clear_condition, self.clear_condition_magnitude, self.unk2, self.unk3, self.play_stats, self.ratings, self.unk4, self.time_stats, self.comment_stats, self.unk9, self.unk10, self.unk11, self.unk12, self.one_screen_thumbnail, self.entire_thumbnail, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -2865,6 +3315,12 @@ class WorldMapInfo(common.Structure):
 		self.unk6 = None
 		self.unk7 = None
 	
+	def __key(self):
+		return (self.id, self.owner_id, self.unk1, self.thumbnail, self.worlds, self.levels, self.unk2, self.unk3, self.data_ids, self.unk4, self.unk5, self.unk6, self.unk7, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -2918,6 +3374,12 @@ class CourseTimeStats(common.Structure):
 		self.world_record = None
 		self.upload_time = None
 	
+	def __key(self):
+		return (self.first_completion, self.world_record_holder, self.world_record, self.upload_time, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -2951,6 +3413,12 @@ class EventCourseGhostInfo(common.Structure):
 		self.replay_file = RelationObjectReqGetInfo()
 		self.time = None
 		self.pid = None
+	
+	def __key(self):
+		return (self.replay_file, self.time, self.pid, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -2987,6 +3455,12 @@ class EventCourseHistogram(common.Structure):
 		self.values = None
 		self.medals = None
 		self.unk4 = None
+	
+	def __key(self):
+		return (self.data_id, self.unk1, self.unk2, self.unk3, self.values, self.medals, self.unk4, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -3047,6 +3521,12 @@ class EventCourseInfo(common.Structure):
 		self.unk10 = None
 		self.medal_time = None
 		self.personal_ghost = RelationObjectReqGetInfo()
+	
+	def __key(self):
+		return (self.data_id, self.name, self.description, self.game_style, self.course_theme, self.unk1, self.unk2, self.upload_time, self.get_info, self.unk3, self.unk4, self.unk5, self.one_screen_thumbnail, self.entire_thumbnail, self.end_time, self.unk6, self.unk7, self.unk8, self.unk9, self.best_time, self.unk10, self.medal_time, self.personal_ghost, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -3131,6 +3611,12 @@ class EventCourseStatusInfo(common.Structure):
 		self.unk2 = None
 		self.unk3 = None
 	
+	def __key(self):
+		return (self.unk1, self.unk2, self.unk3, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -3164,6 +3650,12 @@ class EventCourseThumbnail(common.Structure):
 		self.filesize = None
 		self.root_ca_cert = None
 		self.filename = None
+	
+	def __key(self):
+		return (self.url, self.headers, self.filesize, self.root_ca_cert, self.filename, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -3203,6 +3695,12 @@ class RelationObjectReqGetInfo(common.Structure):
 		self.unk = None
 		self.filename = None
 	
+	def __key(self):
+		return (self.url, self.data_type, self.size, self.unk, self.filename, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -3237,6 +3735,12 @@ class ReqGetInfoHeadersInfo(common.Structure):
 		super().__init__()
 		self.headers = None
 		self.expiration = None
+	
+	def __key(self):
+		return (self.headers, self.expiration, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -3273,6 +3777,12 @@ class SyncUserProfileResult(common.Structure):
 		self.unk4 = None
 		self.unk5 = None
 		self.unk6 = None
+	
+	def __key(self):
+		return (self.pid, self.username, self.unk1, self.unk2, self.unk3, self.country, self.unk4, self.unk5, self.unk6, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -3340,6 +3850,12 @@ class UserInfo(common.Structure):
 		self.unk14 = None
 		self.unk15 = None
 		self.unk16 = None
+	
+	def __key(self):
+		return (self.pid, self.code, self.name, self.unk1, self.unk2, self.country, self.region, self.last_active, self.unk3, self.unk4, self.unk5, self.play_stats, self.maker_stats, self.endless_challenge_high_scores, self.multiplayer_stats, self.unk7, self.badges, self.unk8, self.unk9, self.unk10, self.unk11, self.unk12, self.unk13, self.unk14, self.unk15, self.unk16, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -3443,6 +3959,12 @@ class UnknownStruct1(common.Structure):
 		self.unk3 = None
 		self.unk4 = None
 	
+	def __key(self):
+		return (self.unk1, self.unk2, self.unk3, self.unk4, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -3476,6 +3998,12 @@ class UnknownStruct3(common.Structure):
 		self.unk1 = None
 		self.unk2 = None
 	
+	def __key(self):
+		return (self.unk1, self.unk2, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -3504,6 +4032,12 @@ class UnknownStruct6(common.Structure):
 		super().__init__()
 		self.unk1 = None
 		self.unk2 = None
+	
+	def __key(self):
+		return (self.unk1, self.unk2, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):

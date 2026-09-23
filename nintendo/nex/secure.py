@@ -13,6 +13,12 @@ class ConnectionData(common.Structure):
 		self.station = None
 		self.connection_id = None
 	
+	def __key(self):
+		return (self.station, self.connection_id, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -40,6 +46,12 @@ class NintendoLoginData(common.Structure):
 	def __init__(self):
 		super().__init__()
 		self.token = None
+	
+	def __key(self):
+		return (self.token, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):

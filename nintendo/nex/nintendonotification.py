@@ -21,6 +21,12 @@ class u8KeyValue(common.Data):
 		self.key = None
 		self.value = None
 	
+	def __key(self):
+		return (self.key, self.value, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -50,6 +56,12 @@ class u32KeyValue(common.Data):
 		super().__init__()
 		self.key = None
 		self.value = None
+	
+	def __key(self):
+		return (self.key, self.value, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -81,6 +93,12 @@ class u64KeyValue(common.Data):
 		self.key = None
 		self.value = None
 	
+	def __key(self):
+		return (self.key, self.value, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -110,6 +128,12 @@ class StringKeyValue(common.Data):
 		super().__init__()
 		self.key = None
 		self.value = None
+	
+	def __key(self):
+		return (self.key, self.value, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -141,6 +165,12 @@ class NintendoNotificationEvent(common.Structure):
 		self.type = None
 		self.pid = None
 		self.data = None
+	
+	def __key(self):
+		return (self.type, self.pid, self.data, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -174,6 +204,12 @@ class NintendoNotificationEventGeneral(common.Data):
 		self.param2 = None
 		self.param3 = None
 		self.text = None
+	
+	def __key(self):
+		return (self.param1, self.param2, self.param3, self.text, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):
@@ -211,6 +247,12 @@ class NintendoNotificationEventKeyValue(common.Data):
 		self.u64 = None
 		self.string = None
 	
+	def __key(self):
+		return (self.u8, self.u32, self.u64, self.string, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
@@ -247,6 +289,12 @@ class NintendoNotificationEventProfile(common.Data):
 		self.area = None
 		self.language = None
 		self.platform = None
+	
+	def __key(self):
+		return (self.region, self.country, self.area, self.language, self.platform, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
 	
 	def __eq__(self, other):
 		if type(self) is not type(other):

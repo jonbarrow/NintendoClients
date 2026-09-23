@@ -18,6 +18,12 @@ class NotificationEvent(common.Structure):
 		self.param3 = 0
 		self.map = {}
 	
+	def __key(self):
+		return (self.pid, self.type, self.param1, self.param2, self.text, self.param3, self.map, )
+	
+	def __hash__(self):
+		return hash(common.make_hashable(self.__key()))
+	
 	def __eq__(self, other):
 		if type(self) is not type(other):
 			return NotImplemented
