@@ -26,6 +26,14 @@ class Ranking2CategorySetting(common.Structure):
 		self.max_seasons_to_go_back = None
 		self.score_order = None
 	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['min_score', 'max_score', 'lowest_rank', 'reset_month', 'reset_day', 'reset_hour', 'reset_mode', 'max_seasons_to_go_back', 'score_order']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
+	
 	def check_required(self, settings, version):
 		for field in ['min_score', 'max_score', 'lowest_rank', 'reset_month', 'reset_day', 'reset_hour', 'reset_mode', 'max_seasons_to_go_back', 'score_order']:
 			if getattr(self, field) is None:
@@ -76,6 +84,14 @@ class Ranking2ChartInfo(common.Structure):
 		self.attribute1 = None
 		self.attribute2 = None
 		self.quantities = None
+	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['create_time', 'index', 'category', 'season', 'bins_size', 'sampling_rate', 'score_order', 'estimate_length', 'estimate_highest_score', 'estimate_lowest_score', 'estimate_median_score', 'estimate_average_score', 'highest_bins_score', 'lowest_bins_score', 'bins_width', 'attribute1', 'attribute2', 'quantities']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
 	
 	def check_required(self, settings, version):
 		for field in ['create_time', 'index', 'category', 'season', 'bins_size', 'sampling_rate', 'score_order', 'estimate_length', 'estimate_highest_score', 'estimate_lowest_score', 'estimate_median_score', 'estimate_average_score', 'highest_bins_score', 'lowest_bins_score', 'bins_width', 'attribute1', 'attribute2', 'quantities']:
@@ -130,6 +146,14 @@ class Ranking2ChartInfoInput(common.Structure):
 		self.chart_index = None
 		self.seasons_to_go_back = None
 	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['chart_index', 'seasons_to_go_back']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
+	
 	def check_required(self, settings, version):
 		for field in ['chart_index', 'seasons_to_go_back']:
 			if getattr(self, field) is None:
@@ -151,6 +175,14 @@ class Ranking2CommonData(common.Structure):
 		self.username = None
 		self.mii = None
 		self.binary_data = None
+	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['username', 'mii', 'binary_data']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
 	
 	def check_required(self, settings, version):
 		for field in ['username', 'mii', 'binary_data']:
@@ -175,6 +207,14 @@ class Ranking2EstimateScoreRankInput(common.Structure):
 		self.category = None
 		self.seasons_to_go_back = None
 		self.score = None
+	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['category', 'seasons_to_go_back', 'score']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
 	
 	def check_required(self, settings, version):
 		for field in ['category', 'seasons_to_go_back', 'score']:
@@ -202,6 +242,14 @@ class Ranking2EstimateScoreRankOutput(common.Structure):
 		self.category = None
 		self.season = None
 		self.sampling_rate = None
+	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['rank', 'length', 'score', 'category', 'season', 'sampling_rate']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
 	
 	def check_required(self, settings, version):
 		for field in ['rank', 'length', 'score', 'category', 'season', 'sampling_rate']:
@@ -235,6 +283,14 @@ class Ranking2GetByListParam(common.Structure):
 		self.sort_flags = None
 		self.option_flags = None
 		self.seasons_to_go_back = None
+	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['category', 'offset', 'length', 'sort_flags', 'option_flags', 'seasons_to_go_back']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
 	
 	def check_required(self, settings, version):
 		for field in ['category', 'offset', 'length', 'sort_flags', 'option_flags', 'seasons_to_go_back']:
@@ -271,6 +327,14 @@ class Ranking2GetParam(common.Structure):
 		self.option_flags = 0
 		self.mode = 2
 		self.seasons_to_go_back = 0
+	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['unique_id', 'pid', 'category', 'offset', 'count', 'sort_flags', 'option_flags', 'mode', 'seasons_to_go_back']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
 	
 	def check_required(self, settings, version):
 		for field in ['category']:
@@ -309,6 +373,14 @@ class Ranking2Info(common.Structure):
 		self.num_entries = None
 		self.season = None
 	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['data', 'lowest_rank', 'num_entries', 'season']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
+	
 	def check_required(self, settings, version):
 		for field in ['data', 'lowest_rank', 'num_entries', 'season']:
 			if getattr(self, field) is None:
@@ -337,6 +409,14 @@ class Ranking2RankData(common.Structure):
 		self.rank = None
 		self.score = None
 		self.common_data = Ranking2CommonData()
+	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['misc', 'unique_id', 'pid', 'rank', 'score', 'common_data']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
 	
 	def check_required(self, settings, version):
 		for field in ['misc', 'unique_id', 'pid', 'rank', 'score']:
@@ -367,6 +447,14 @@ class Ranking2ScoreData(common.Structure):
 		self.misc = None
 		self.category = None
 		self.score = None
+	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['misc', 'category', 'score']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
 	
 	def check_required(self, settings, version):
 		for field in ['misc', 'category', 'score']:

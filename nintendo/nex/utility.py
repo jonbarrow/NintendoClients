@@ -13,6 +13,14 @@ class UniqueIdInfo(common.Structure):
 		self.unique_id = 0
 		self.password = 0
 	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['unique_id', 'password']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
+	
 	def check_required(self, settings, version):
 		pass
 	

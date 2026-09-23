@@ -38,6 +38,11 @@ class Result:
 	def __init__(self, code: int = 0x10001):
 		self._code = code
 	
+	def __eq__(self, other: object) -> bool:
+		if type(self) is not type(other):
+			return NotImplemented
+		return self._code == other._code
+	
 	def __str__(self):
 		return f"{self.name()} (0x{self.code():08X})"
 		
@@ -131,6 +136,11 @@ class Structure:
 	
 	
 class Data(Structure):
+	def __eq__(self, other: object) -> bool:
+		if type(self) is not type(other):
+			return NotImplemented
+		return True
+
 	def save(self, stream: "streams.StreamOut", version: int) -> None:
 		pass
 
@@ -145,6 +155,11 @@ class DataHolder:
 
 	def __init__(self):
 		self.data = Data()
+		
+	def __eq__(self, other: object) -> bool:
+		if type(self) is not type(other):
+			return NotImplemented
+		return self.data == other.data
 		
 	def encode(self, stream: "streams.StreamOut"):
 		stream.string(self.data.__class__.__name__)
@@ -166,6 +181,11 @@ class DataHolder:
 		
 		
 class NullData(Data):
+	def __eq__(self, other: object) -> bool:
+		if type(self) is not type(other):
+			return NotImplemented
+		return True
+
 	def load(self, stream: "streams.StreamIn", version: int) -> None: pass
 	def save(self, stream: "streams.StreamOut", version: int) -> None: pass
 DataHolder.register(NullData, "NullData")
@@ -184,6 +204,11 @@ class StationURL:
 	def __init__(self, scheme="prudp", **kwargs):
 		self.urlscheme = scheme
 		self.params = kwargs
+
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		return self.urlscheme == other.urlscheme and self.params == other.params
 
 	def __repr__(self):
 		params = ";".join(
@@ -233,6 +258,11 @@ class DateTime:
 
 	def __init__(self, value: int):
 		self._value = value
+		
+	def __eq__(self, other: object) -> bool:
+		if type(self) is not type(other):
+			return NotImplemented
+		return self._value == other._value
 		
 	def second(self) -> int: return self._value & 63
 	def minute(self) -> int: return (self._value >> 6) & 63
@@ -291,6 +321,11 @@ class ResultRange(Structure):
 	def __init__(self, offset: int = 0, size: int = 10):
 		self.offset = offset
 		self.size = size
+
+	def __eq__(self, other: object) -> bool:
+		if type(self) is not type(other):
+			return NotImplemented
+		return self.offset == other.offset and self.size == other.size
 
 	def load(self, stream: "streams.StreamIn", version: int) -> None:
 		self.offset = stream.u32()

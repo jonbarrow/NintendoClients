@@ -20,6 +20,14 @@ class AccountData(common.Structure):
 		self.expiry_date = None
 		self.expired_message = None
 	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['pid', 'name', 'groups', 'email', 'creation_date', 'effective_date', 'not_effective_message', 'expiry_date', 'expired_message']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
+	
 	def check_required(self, settings, version):
 		for field in ['pid', 'name', 'groups', 'email', 'creation_date', 'effective_date', 'not_effective_message', 'expiry_date', 'expired_message']:
 			if getattr(self, field) is None:
@@ -54,6 +62,14 @@ class BasicAccountInfo(common.Structure):
 		super().__init__()
 		self.pid = None
 		self.name = None
+	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['pid', 'name']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
 	
 	def check_required(self, settings, version):
 		for field in ['pid', 'name']:

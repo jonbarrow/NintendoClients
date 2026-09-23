@@ -15,6 +15,14 @@ class AuthenticationInfo(common.Data):
 		self.token_type = 1
 		self.server_version = 0
 	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['token', 'ngs_version', 'token_type', 'server_version']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
+	
 	def check_required(self, settings, version):
 		for field in ['token']:
 			if getattr(self, field) is None:
@@ -42,6 +50,14 @@ class RVConnectionData(common.Structure):
 		self.special_protocols = []
 		self.special_station = common.StationURL.parse("prudp:/")
 		self.server_time = common.DateTime(0)
+	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['main_station', 'special_protocols', 'special_station', 'server_time']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
 	
 	def max_version(self, settings):
 		version = 0
@@ -82,6 +98,14 @@ class ValidateAndRequestTicketParam(common.Structure):
 		self.nex_version = None
 		self.client_version = None
 	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['platform', 'username', 'data', 'skip_version_check', 'nex_version', 'client_version']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
+	
 	def check_required(self, settings, version):
 		for field in ['username', 'data', 'nex_version', 'client_version']:
 			if getattr(self, field) is None:
@@ -114,6 +138,14 @@ class ValidateAndRequestTicketResult(common.Structure):
 		self.server_time = None
 		self.server_name = None
 		self.source_key = None
+	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['pid', 'ticket', 'server_url', 'server_time', 'server_name', 'source_key']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
 	
 	def check_required(self, settings, version):
 		for field in ['pid', 'ticket', 'server_url', 'server_time', 'server_name', 'source_key']:

@@ -21,6 +21,14 @@ class DataStoreChangeMetaCompareParam(common.Structure):
 		self.data_type = None
 		self.status = None
 	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['comparison_flag', 'name', 'permission', 'delete_permission', 'period', 'meta_binary', 'tags', 'referred_count', 'data_type', 'status']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
+	
 	def check_required(self, settings, version):
 		for field in ['comparison_flag', 'name', 'period', 'meta_binary', 'tags', 'referred_count', 'data_type', 'status']:
 			if getattr(self, field) is None:
@@ -69,6 +77,14 @@ class DataStoreChangeMetaParam(common.Structure):
 		self.status = None
 		self.compare_param = DataStoreChangeMetaCompareParam()
 		self.persistence_target = DataStorePersistenceTarget()
+	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['data_id', 'modifies_flag', 'name', 'permission', 'delete_permission', 'period', 'meta_binary', 'tags', 'update_password', 'referred_count', 'data_type', 'status', 'compare_param', 'persistence_target']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
 	
 	def check_required(self, settings, version):
 		for field in ['data_id', 'modifies_flag', 'name', 'period', 'meta_binary', 'tags', 'update_password', 'referred_count', 'data_type', 'status']:
@@ -122,6 +138,14 @@ class DataStoreChangeMetaParamV1(common.Structure):
 		self.tags = None
 		self.update_password = None
 	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['data_id', 'modifies_flag', 'name', 'permission', 'delete_permission', 'period', 'meta_binary', 'tags', 'update_password']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
+	
 	def check_required(self, settings, version):
 		for field in ['data_id', 'modifies_flag', 'name', 'period', 'meta_binary', 'tags', 'update_password']:
 			if getattr(self, field) is None:
@@ -157,6 +181,14 @@ class DataStoreCompletePostParam(common.Structure):
 		self.data_id = None
 		self.success = None
 	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['data_id', 'success']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
+	
 	def check_required(self, settings, version):
 		for field in ['data_id', 'success']:
 			if getattr(self, field) is None:
@@ -177,6 +209,14 @@ class DataStoreCompletePostParamV1(common.Structure):
 		super().__init__()
 		self.data_id = None
 		self.success = None
+	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['data_id', 'success']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
 	
 	def check_required(self, settings, version):
 		for field in ['data_id', 'success']:
@@ -199,6 +239,14 @@ class DataStoreCompleteUpdateParam(common.Structure):
 		self.data_id = None
 		self.version = None
 		self.success = None
+	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['data_id', 'version', 'success']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
 	
 	def check_required(self, settings, version):
 		for field in ['data_id', 'version', 'success']:
@@ -223,6 +271,14 @@ class DataStoreDeleteParam(common.Structure):
 		self.data_id = None
 		self.update_password = None
 	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['data_id', 'update_password']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
+	
 	def check_required(self, settings, version):
 		for field in ['data_id', 'update_password']:
 			if getattr(self, field) is None:
@@ -245,6 +301,14 @@ class DataStoreGetMetaParam(common.Structure):
 		self.persistence_target = DataStorePersistenceTarget()
 		self.result_option = 0
 		self.access_password = 0
+	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['data_id', 'persistence_target', 'result_option', 'access_password']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
 	
 	def check_required(self, settings, version):
 		pass
@@ -269,6 +333,14 @@ class DataStoreGetNewArrivedNotificationsParam(common.Structure):
 		self.last_notification_id = None
 		self.limit = None
 	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['last_notification_id', 'limit']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
+	
 	def check_required(self, settings, version):
 		for field in ['last_notification_id', 'limit']:
 			if getattr(self, field) is None:
@@ -289,6 +361,14 @@ class DataStoreGetNotificationUrlParam(common.Structure):
 		super().__init__()
 		self.previous_url = None
 	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['previous_url']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
+	
 	def check_required(self, settings, version):
 		for field in ['previous_url']:
 			if getattr(self, field) is None:
@@ -306,6 +386,14 @@ class DataStoreGetSpecificMetaParam(common.Structure):
 	def __init__(self):
 		super().__init__()
 		self.data_ids = None
+	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['data_ids']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
 	
 	def check_required(self, settings, version):
 		for field in ['data_ids']:
@@ -325,6 +413,14 @@ class DataStoreGetSpecificMetaParamV1(common.Structure):
 		super().__init__()
 		self.data_ids = None
 	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['data_ids']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
+	
 	def check_required(self, settings, version):
 		for field in ['data_ids']:
 			if getattr(self, field) is None:
@@ -343,6 +439,14 @@ class DataStoreKeyValue(common.Structure):
 		super().__init__()
 		self.key = None
 		self.value = None
+	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['key', 'value']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
 	
 	def check_required(self, settings, version):
 		for field in ['key', 'value']:
@@ -381,6 +485,14 @@ class DataStoreMetaInfo(common.Structure):
 		self.expire_time = None
 		self.tags = None
 		self.ratings = None
+	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['data_id', 'owner_id', 'size', 'name', 'data_type', 'meta_binary', 'permission', 'delete_permission', 'create_time', 'update_time', 'period', 'status', 'referred_count', 'refer_data_id', 'flag', 'referred_time', 'expire_time', 'tags', 'ratings']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
 	
 	def check_required(self, settings, version):
 		for field in ['data_id', 'owner_id', 'size', 'name', 'data_type', 'meta_binary', 'create_time', 'update_time', 'period', 'status', 'referred_count', 'refer_data_id', 'flag', 'referred_time', 'expire_time', 'tags', 'ratings']:
@@ -437,6 +549,14 @@ class DataStoreNotification(common.Structure):
 		self.notification_id = None
 		self.data_id = None
 	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['notification_id', 'data_id']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
+	
 	def check_required(self, settings, version):
 		for field in ['notification_id', 'data_id']:
 			if getattr(self, field) is None:
@@ -457,6 +577,14 @@ class DataStoreNotificationV1(common.Structure):
 		super().__init__()
 		self.notification_id = None
 		self.data_id = None
+	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['notification_id', 'data_id']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
 	
 	def check_required(self, settings, version):
 		for field in ['notification_id', 'data_id']:
@@ -479,6 +607,14 @@ class DataStorePasswordInfo(common.Structure):
 		self.data_id = None
 		self.access_password = None
 		self.update_password = None
+	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['data_id', 'access_password', 'update_password']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
 	
 	def check_required(self, settings, version):
 		for field in ['data_id', 'access_password', 'update_password']:
@@ -503,6 +639,14 @@ class DataStorePermission(common.Structure):
 		self.permission = 3
 		self.recipients = []
 	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['permission', 'recipients']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
+	
 	def check_required(self, settings, version):
 		pass
 	
@@ -522,6 +666,14 @@ class DataStorePersistenceInfo(common.Structure):
 		self.owner_id = None
 		self.slot_id = None
 		self.data_id = None
+	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['owner_id', 'slot_id', 'data_id']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
 	
 	def check_required(self, settings, version):
 		for field in ['owner_id', 'slot_id', 'data_id']:
@@ -546,6 +698,14 @@ class DataStorePersistenceInitParam(common.Structure):
 		self.persistence_id = 65535
 		self.delete_last_object = True
 	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['persistence_id', 'delete_last_object']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
+	
 	def check_required(self, settings, version):
 		pass
 	
@@ -564,6 +724,14 @@ class DataStorePersistenceTarget(common.Structure):
 		super().__init__()
 		self.owner_id = 0
 		self.persistence_id = 65535
+	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['owner_id', 'persistence_id']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
 	
 	def check_required(self, settings, version):
 		pass
@@ -586,6 +754,14 @@ class DataStorePrepareGetParam(common.Structure):
 		self.persistence_target = DataStorePersistenceTarget()
 		self.access_password = 0
 		self.extra_data = []
+	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['data_id', 'lock_id', 'persistence_target', 'access_password', 'extra_data']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
 	
 	def check_required(self, settings, version):
 		if settings["nex.version"] >= 30500:
@@ -614,6 +790,14 @@ class DataStorePrepareGetParamV1(common.Structure):
 		super().__init__()
 		self.data_id = None
 		self.lock_id = 0
+	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['data_id', 'lock_id']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
 	
 	def check_required(self, settings, version):
 		for field in ['data_id']:
@@ -646,6 +830,14 @@ class DataStorePreparePostParam(common.Structure):
 		self.rating_init_param = []
 		self.persistence_init_param = DataStorePersistenceInitParam()
 		self.extra_data = None
+	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['size', 'name', 'data_type', 'meta_binary', 'permission', 'delete_permission', 'flag', 'period', 'refer_data_id', 'tags', 'rating_init_param', 'persistence_init_param', 'extra_data']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
 	
 	def check_required(self, settings, version):
 		for field in ['size', 'name', 'data_type', 'meta_binary', 'flag', 'period']:
@@ -705,6 +897,14 @@ class DataStorePreparePostParamV1(common.Structure):
 		self.tags = None
 		self.rating_init_param = None
 	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['size', 'name', 'data_type', 'meta_binary', 'permission', 'delete_permission', 'flag', 'period', 'refer_data_id', 'tags', 'rating_init_param']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
+	
 	def check_required(self, settings, version):
 		for field in ['size', 'name', 'flag', 'period', 'tags', 'rating_init_param']:
 			if getattr(self, field) is None:
@@ -746,6 +946,14 @@ class DataStorePrepareUpdateParam(common.Structure):
 		self.update_password = None
 		self.extra_data = None
 	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['data_id', 'size', 'update_password', 'extra_data']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
+	
 	def check_required(self, settings, version):
 		for field in ['data_id', 'size', 'update_password', 'extra_data']:
 			if getattr(self, field) is None:
@@ -771,6 +979,14 @@ class DataStoreRateObjectParam(common.Structure):
 		self.rating_value = None
 		self.access_password = None
 	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['rating_value', 'access_password']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
+	
 	def check_required(self, settings, version):
 		for field in ['rating_value', 'access_password']:
 			if getattr(self, field) is None:
@@ -792,6 +1008,14 @@ class DataStoreRatingInfo(common.Structure):
 		self.total_value = None
 		self.count = None
 		self.initial_value = None
+	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['total_value', 'count', 'initial_value']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
 	
 	def check_required(self, settings, version):
 		for field in ['total_value', 'count', 'initial_value']:
@@ -815,6 +1039,14 @@ class DataStoreRatingInfoWithSlot(common.Structure):
 		super().__init__()
 		self.slot = None
 		self.info = DataStoreRatingInfo()
+	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['slot', 'info']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
 	
 	def check_required(self, settings, version):
 		for field in ['slot']:
@@ -842,6 +1074,14 @@ class DataStoreRatingInitParam(common.Structure):
 		self.range_max = None
 		self.period_hour = None
 		self.period_duration = None
+	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['flag', 'internal_flag', 'lock_type', 'initial_value', 'range_min', 'range_max', 'period_hour', 'period_duration']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
 	
 	def check_required(self, settings, version):
 		for field in ['flag', 'internal_flag', 'lock_type', 'initial_value', 'range_min', 'range_max', 'period_hour', 'period_duration']:
@@ -876,6 +1116,14 @@ class DataStoreRatingInitParamWithSlot(common.Structure):
 		self.slot = None
 		self.param = DataStoreRatingInitParam()
 	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['slot', 'param']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
+	
 	def check_required(self, settings, version):
 		for field in ['slot']:
 			if getattr(self, field) is None:
@@ -898,6 +1146,14 @@ class DataStoreRatingLog(common.Structure):
 		self.pid = None
 		self.rating_value = None
 		self.lock_expiration_time = None
+	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['is_rated', 'pid', 'rating_value', 'lock_expiration_time']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
 	
 	def check_required(self, settings, version):
 		for field in ['is_rated', 'pid', 'rating_value', 'lock_expiration_time']:
@@ -924,6 +1180,14 @@ class DataStoreRatingTarget(common.Structure):
 		self.data_id = None
 		self.slot = None
 	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['data_id', 'slot']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
+	
 	def check_required(self, settings, version):
 		for field in ['data_id', 'slot']:
 			if getattr(self, field) is None:
@@ -946,6 +1210,14 @@ class DataStoreReqGetAdditionalMeta(common.Structure):
 		self.data_type = None
 		self.version = None
 		self.meta_binary = None
+	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['owner_id', 'data_type', 'version', 'meta_binary']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
 	
 	def check_required(self, settings, version):
 		for field in ['owner_id', 'data_type', 'version', 'meta_binary']:
@@ -974,6 +1246,14 @@ class DataStoreReqGetInfo(common.Structure):
 		self.size = None
 		self.root_ca_cert = None
 		self.data_id = None
+	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['url', 'headers', 'size', 'root_ca_cert', 'data_id']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
 	
 	def check_required(self, settings, version):
 		for field in ['url', 'headers', 'size', 'root_ca_cert']:
@@ -1010,6 +1290,14 @@ class DataStoreReqGetInfoV1(common.Structure):
 		self.size = None
 		self.root_ca_cert = None
 	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['url', 'headers', 'size', 'root_ca_cert']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
+	
 	def check_required(self, settings, version):
 		for field in ['url', 'headers', 'size', 'root_ca_cert']:
 			if getattr(self, field) is None:
@@ -1036,6 +1324,14 @@ class DataStoreReqGetNotificationUrlInfo(common.Structure):
 		self.key = None
 		self.query = None
 		self.root_ca_cert = None
+	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['url', 'key', 'query', 'root_ca_cert']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
 	
 	def check_required(self, settings, version):
 		for field in ['url', 'key', 'query', 'root_ca_cert']:
@@ -1064,6 +1360,14 @@ class DataStoreReqPostInfo(common.Structure):
 		self.headers = None
 		self.form = None
 		self.root_ca_cert = None
+	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['data_id', 'url', 'headers', 'form', 'root_ca_cert']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
 	
 	def check_required(self, settings, version):
 		for field in ['data_id', 'url', 'headers', 'form', 'root_ca_cert']:
@@ -1095,6 +1399,14 @@ class DataStoreReqPostInfoV1(common.Structure):
 		self.form = None
 		self.root_ca_cert = None
 	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['data_id', 'url', 'headers', 'form', 'root_ca_cert']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
+	
 	def check_required(self, settings, version):
 		for field in ['data_id', 'url', 'headers', 'form', 'root_ca_cert']:
 			if getattr(self, field) is None:
@@ -1124,6 +1436,14 @@ class DataStoreReqUpdateInfo(common.Structure):
 		self.headers = None
 		self.form = None
 		self.root_ca_cert = None
+	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['version', 'url', 'headers', 'form', 'root_ca_cert']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
 	
 	def check_required(self, settings, version):
 		for field in ['version', 'url', 'headers', 'form', 'root_ca_cert']:
@@ -1168,6 +1488,14 @@ class DataStoreSearchParam(common.Structure):
 		self.use_cache = False
 		self.total_count_enabled = True
 		self.data_types = []
+	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['search_target', 'owner_ids', 'owner_type', 'destination_ids', 'data_type', 'created_after', 'created_before', 'updated_after', 'updated_before', 'refer_data_id', 'tags', 'result_order_column', 'result_order', 'result_range', 'result_option', 'minimal_rating_frequency', 'use_cache', 'total_count_enabled', 'data_types']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
 	
 	def check_required(self, settings, version):
 		pass
@@ -1223,6 +1551,14 @@ class DataStoreSearchResult(common.Structure):
 		self.result = None
 		self.total_count_type = None
 	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['total_count', 'result', 'total_count_type']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
+	
 	def check_required(self, settings, version):
 		for field in ['total_count', 'result', 'total_count_type']:
 			if getattr(self, field) is None:
@@ -1248,6 +1584,14 @@ class DataStoreSpecificMetaInfo(common.Structure):
 		self.size = None
 		self.data_type = None
 		self.version = None
+	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['data_id', 'owner_id', 'size', 'data_type', 'version']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
 	
 	def check_required(self, settings, version):
 		for field in ['data_id', 'owner_id', 'size', 'data_type', 'version']:
@@ -1279,6 +1623,14 @@ class DataStoreSpecificMetaInfoV1(common.Structure):
 		self.data_type = None
 		self.version = None
 	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['data_id', 'owner_id', 'size', 'data_type', 'version']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
+	
 	def check_required(self, settings, version):
 		for field in ['data_id', 'owner_id', 'size', 'data_type', 'version']:
 			if getattr(self, field) is None:
@@ -1306,6 +1658,14 @@ class DataStoreTouchObjectParam(common.Structure):
 		self.data_id = None
 		self.lock_id = None
 		self.access_password = None
+	
+	def __eq__(self, other):
+		if type(self) is not type(other):
+			return NotImplemented
+		for field in ['data_id', 'lock_id', 'access_password']:
+			if getattr(self, field) != getattr(other, field):
+				return False
+		return True
 	
 	def check_required(self, settings, version):
 		for field in ['data_id', 'lock_id', 'access_password']:

@@ -821,6 +821,7 @@ class CodeGenerator:
 		stream.indent()
 		
 		self.generate_struct_init(stream, struct)
+		self.generate_struct_eq(stream, struct)
 		self.generate_struct_version(stream, struct)
 		self.generate_struct_check(stream, struct)
 		self.generate_struct_load(stream, struct)
@@ -851,6 +852,39 @@ class CodeGenerator:
 			
 			elif isinstance(field, Condition):
 				self.generate_struct_init_body(stream, field.body, defaults)
+	
+	def generate_struct_eq(self, stream, struct):
+		fields = self.collect_struct_fields(struct)
+		stream.write_line("def __eq__(self, other):")
+		stream.indent()
+		stream.write_line("if type(self) is not type(other):")
+		stream.write_line("\treturn NotImplemented")
+		if fields:
+			stream.write_line("for field in %s:" %fields)
+			stream.write_line("\tif getattr(self, field) != getattr(other, field):")
+			stream.write_line("\t\treturn False")
+		stream.write_line("return True")
+		stream.unindent()
+		stream.write_line()
+	
+	def collect_struct_fields(self, struct):
+		hierarchy = []
+		while struct is not None:
+			hierarchy.append(struct)
+			struct = self.file.structs.get(struct.parent)
+		
+		fields = []
+		for struct in hierarchy[::-1]:
+			self.collect_body_fields(struct.body, fields)
+		return fields
+	
+	def collect_body_fields(self, body, fields):
+		for field in body.fields:
+			if isinstance(field, Variable):
+				if field.name not in fields:
+					fields.append(field.name)
+			elif isinstance(field, Condition):
+				self.collect_body_fields(field.body, fields)
 	
 	def generate_if_statement(self, stream, cond, prefix=""):
 		field = f'{prefix}settings["nex.version"]' if cond.type == Condition.VERSION else "version"
